@@ -7,6 +7,9 @@ void main() {
   runApp(const MyApp());
 }
 
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -14,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Predictiva',
+      scaffoldMessengerKey: scaffoldMessengerKey,
       theme: ThemeData(
         colorScheme: const ColorScheme(
           brightness: Brightness.light,
@@ -25,7 +29,7 @@ class MyApp extends StatelessWidget {
           onError: Colors.white,
           background: Color(0xff0D0D0F),
           onBackground: Colors.white,
-          surface: Colors.white,
+          surface: Color.fromARGB(255, 74, 74, 74),
           onSurface: Colors.white,
         ),
         textSelectionTheme: TextSelectionThemeData(

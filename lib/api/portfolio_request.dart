@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:predictiva_flutter/utils/snackbar.dart';
+
 class Portfolio {
   final double balance;
   final double profit;
@@ -37,6 +39,7 @@ Future<Portfolio> fetchPortfolio() async {
     final jsonResponse = json.decode(response.body);
     return Portfolio.fromJson(jsonResponse['data']['portfolio']);
   } else {
-    throw Exception('Failed to load portfolio');
+    showSnackbar("Failed to load portfolio");
+    return Portfolio(balance: 0, profit: 0, profitPercentage: 0, assets: 0);
   }
 }

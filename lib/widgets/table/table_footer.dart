@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:predictiva_flutter/widgets/button.dart';
 
@@ -28,11 +30,11 @@ class OrderTableFooter extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-              "${((currentPage - 1) * 5 + 1).toString()} - ${((currentPage - 1) * 5 + itemsPerPage).toString()} of $totalItems"),
+              "${((currentPage - 1) * 5 + 1).toString()} - ${min(totalItems, ((currentPage - 1) * 5 + itemsPerPage)).toString()} of $totalItems"),
           Row(
             children: [
               BorderIconButton(
-                disabled: currentPage == 1,
+                disabled: currentPage <= 1,
                 onTap: () {
                   updateCurrentPage(currentPage - 1);
                 },
@@ -46,7 +48,7 @@ class OrderTableFooter extends StatelessWidget {
                 width: 12,
               ),
               BorderIconButton(
-                disabled: currentPage == totalItems / itemsPerPage,
+                disabled: currentPage >= totalItems / itemsPerPage,
                 onTap: () {
                   updateCurrentPage(currentPage + 1);
                 },

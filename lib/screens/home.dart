@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:predictiva_flutter/api/orders_request.dart';
 import 'package:predictiva_flutter/api/portfolio_request.dart';
+import 'package:predictiva_flutter/utils/filter.dart';
 import 'package:predictiva_flutter/widgets/header.dart';
 import 'package:predictiva_flutter/widgets/nav.dart';
 import 'package:predictiva_flutter/widgets/summary/summary.dart';
@@ -22,6 +23,7 @@ class _HomeState extends State<Home> {
   Portfolio portfolio =
       Portfolio(balance: 0, profit: 0, profitPercentage: 0, assets: 0);
   List<Order> orders = [];
+  List<Order> unfilteredOrders = [];
 
   @override
   void initState() {
@@ -42,7 +44,27 @@ class _HomeState extends State<Home> {
     List<Order> data = await fetchOrders();
     setState(() {
       orders = data;
+      unfilteredOrders = data;
       ordersLoading = false;
+    });
+  }
+
+  void onFilter(
+    String? symbol,
+    int? price,
+    DateTime? startDate,
+    DateTime? endDate,
+  ) {
+    List<Order> filteredOrders =
+        filterOrders(unfilteredOrders, symbol, price, startDate, endDate);
+    setState(() {
+      orders = filteredOrders;
+    });
+  }
+
+  void clearFilters() {
+    setState(() {
+      orders = unfilteredOrders;
     });
   }
 
@@ -78,6 +100,8 @@ class _HomeState extends State<Home> {
                     OrderTable(
                       isLoading: ordersLoading,
                       orders: orders,
+                      onFilter: onFilter,
+                      clearFilters: clearFilters,
                     ),
                   ],
                 ),

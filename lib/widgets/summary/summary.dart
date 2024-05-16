@@ -52,7 +52,7 @@ class Summary extends StatelessWidget {
               value: profits,
               isLoading: loading,
               isPrice: true,
-              percentage: 30,
+              percentage: profitPercentage.toDouble(),
               showBorder: true,
             ),
             SummaryCell(
@@ -61,9 +61,7 @@ class Summary extends StatelessWidget {
               isLoading: loading,
               isPrice: false,
             ),
-            const SummaryFooter(
-                status: Status.warning,
-                message: "This subscription expires in a month")
+            SummaryFooter(status: status, message: statusMessage)
           ],
         ),
       ),

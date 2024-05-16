@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:predictiva_flutter/utils/snackbar.dart';
+
 class Order {
   final String symbol;
   final String type;
@@ -44,6 +46,7 @@ Future<List<Order>> fetchOrders() async {
     List<Order> orders = orderList.map((item) => Order.fromJson(item)).toList();
     return orders;
   } else {
-    throw Exception('Failed to load orders');
+    showSnackbar("Failed to load orders");
+    return [];
   }
 }
