@@ -18,7 +18,3 @@
 
 ![Home](screenshots/home.png)
 ![FilterModal](screenshots/filter_modal.png)
-
-## Technologies Used
-
-- Flutter
