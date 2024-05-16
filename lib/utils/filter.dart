@@ -9,20 +9,22 @@ List<Order> filterOrders(
 ) {
   List<Order> filteredOrders = orders;
   if (symbol != null) {
-    filteredOrders = orders.where((order) => order.symbol == symbol).toList();
+    filteredOrders =
+        filteredOrders.where((order) => order.symbol == symbol).toList();
   }
   if (price != null) {
-    filteredOrders = orders.where((order) => order.price <= price).toList();
+    filteredOrders =
+        filteredOrders.where((order) => order.price <= price).toList();
   }
   if (startDate != null) {
-    filteredOrders = orders
+    filteredOrders = filteredOrders
         .where((order) =>
             DateTime.fromMillisecondsSinceEpoch(order.creationTime * 1000)
                 .isAfter(startDate))
         .toList();
   }
   if (endDate != null) {
-    filteredOrders = orders
+    filteredOrders = filteredOrders
         .where((order) =>
             DateTime.fromMillisecondsSinceEpoch(order.creationTime * 1000)
                 .isBefore(endDate))
