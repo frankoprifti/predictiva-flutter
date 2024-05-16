@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:predictiva_flutter/api/orders_request.dart';
 import 'package:predictiva_flutter/api/portfolio_request.dart';
 import 'package:predictiva_flutter/widgets/header.dart';
 import 'package:predictiva_flutter/widgets/nav.dart';
@@ -17,11 +18,15 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool portfolioLoading = true;
   bool ordersLoading = true;
+
   Portfolio portfolio =
       Portfolio(balance: 0, profit: 0, profitPercentage: 0, assets: 0);
+  List<Order> orders = [];
+
   @override
   void initState() {
     loadPortfolio();
+    loadOrders();
     super.initState();
   }
 
@@ -33,15 +38,23 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void loadOrders() async {
+    List<Order> data = await fetchOrders();
+    setState(() {
+      orders = data;
+      ordersLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
       child: SafeArea(
-        child: Column(
-          children: [
-            const Nav(),
-            SingleChildScrollView(
-              child: Padding(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Nav(),
+              Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Column(
@@ -62,12 +75,15 @@ class _HomeState extends State<Home> {
                     const SizedBox(
                       height: 24,
                     ),
-                    OrderTable(),
+                    OrderTable(
+                      isLoading: ordersLoading,
+                      orders: orders,
+                    ),
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

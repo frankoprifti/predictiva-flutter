@@ -2,21 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:predictiva_flutter/widgets/button.dart';
 
 class TableHeader extends StatelessWidget {
-  const TableHeader({super.key});
+  final VoidCallback showModal;
+
+  const TableHeader({super.key, required this.showModal});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 20),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          const Text(
             'Open trades',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),
           BorderIconButton(
-            icon: Icons.filter_list,
+            onTap: () {
+              showModal();
+            },
+            icon: const Icon(Icons.filter_list,
+                color: Color(0xffEDEDF0), size: 24),
           ),
         ],
       ),
