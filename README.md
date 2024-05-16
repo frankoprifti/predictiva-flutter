@@ -1,16 +1,24 @@
-# predictiva_flutter
+# Predictiva Orders
 
-A new Flutter project.
+## Features
 
-## Getting Started
+- **Summary View**: Users can view their balance, profits and assets.
+- **Orders**: The app fetches the orders of the users and shows them in a paginated table view.
+- **Filter**: It gives an option to the users to filter the orders based on the symbol, price and a date range.
 
-This project is a starting point for a Flutter application.
+## Installation
 
-A few resources to get you started if this is your first Flutter project:
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run `flutter pub get` to install dependencies.
+4. Connect a device or emulator.
+5. Run `flutter run` to launch the app.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Home](screenshots/home.png)
+![FilterModal](screenshots/filter_modal.png)
+
+## Technologies Used
+
+- Flutter
